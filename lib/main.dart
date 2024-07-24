@@ -69,13 +69,11 @@ class MyApp extends StatelessWidget {
             return supportedLocales.first;
           },
           theme: ThemeData(
-
             colorScheme:
             ColorScheme.fromSeed(seedColor: ColorManager.primary),
             useMaterial3: true,
           ),
           title: 'Flutter Demo',
-
           home:   HomeView(),
         ),
         listener: (BuildContext context, HomeViewState state) {  },

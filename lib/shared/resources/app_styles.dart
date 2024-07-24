@@ -4,105 +4,63 @@ import 'size_config.dart';
 
 abstract class AppStyles {
 
-  static TextStyle styleRegular16(context) {
-    return TextStyle(
-      color: const Color(0xFF064060),
-      fontSize: getResponsiveFontSize(context,fontSize: 16),
-      fontFamily: 'Montserrat',
+  static const  TextStyle  styleDMSansRegular12 = TextStyle(
+      color: Color(0xFF6E6A7C),
+      fontSize: 12,
+      fontFamily: 'DM Sans',
       fontWeight: FontWeight.w400,
-      height: 0,
+      height: 0.18,
     );
-  }
+  static const TextStyle styleDMSansRegular14 = TextStyle(
+      color: Color(0xFF7F7F7F),
+      fontSize: 14,
+      fontFamily: 'DM Sans',
+      fontWeight: FontWeight.w400,
+    );
+  static const TextStyle styleDMSansRegular16 = TextStyle(
+      color: Color(0xFF7F7F7F),
+      fontSize: 14,
+      fontFamily: 'DM Sans',
+      fontWeight: FontWeight.w400,
+      // height: 0.10,
+      letterSpacing: 0.20,
+    );
 
-  static TextStyle styleMedium16(BuildContext context) {
-    return TextStyle(
-      color: const Color(0xFF064060),
-      fontSize: getResponsiveFontSize(context, fontSize: 16),
-      fontFamily: 'Montserrat',
+  static const TextStyle styleDMSansMedium12 = TextStyle(
+      color: Color(0xFF5F33E1),
+      fontSize: 12,
+      fontFamily: 'DM Sans',
       fontWeight: FontWeight.w500,
-      height: 0,
     );
-  }
 
-  static TextStyle styleSemiBold16(BuildContext context) {
-    return TextStyle(
-      color: const Color(0xFF064060),
-      fontSize: getResponsiveFontSize(context, fontSize: 16),
-      fontFamily: 'Montserrat',
-      fontWeight: FontWeight.w600,
-      height: 0,
-    );
-  }
-
-  static TextStyle styleSemiBold20(BuildContext context) {
-    return TextStyle(
-      color: const Color(0xFF064060),
-      fontSize: getResponsiveFontSize(context, fontSize: 20),
-      fontFamily: 'Montserrat',
-      fontWeight: FontWeight.w600,
-      height: 0,
-    );
-  }
-
-  static TextStyle styleRegular12(BuildContext context) {
-    return TextStyle(
-      color: const Color(0xFFAAAAAA),
-      fontSize: getResponsiveFontSize(context, fontSize: 12),
-      fontFamily: 'Montserrat',
-      fontWeight: FontWeight.w400,
-      height: 0,
-    );
-  }
-
-  static TextStyle styleSemiBold24(BuildContext context) {
-    return TextStyle(
-      color: const Color(0xFF4EB7F2),
-      fontSize: getResponsiveFontSize(context, fontSize: 24),
-      fontFamily: 'Montserrat',
-      fontWeight: FontWeight.w600,
-      height: 0,
-    );
-  }
-
-  static TextStyle styleRegular14(BuildContext context) {
-    return TextStyle(
-      color: const Color(0xFFAAAAAA),
-      fontSize: getResponsiveFontSize(context, fontSize: 14),
-      fontFamily: 'Montserrat',
-      fontWeight: FontWeight.w400,
-      height: 0,
-    );
-  }
-
-  static TextStyle styleSemiBold18(BuildContext context) {
-    return TextStyle(
-      color: Colors.white,
-      fontSize: getResponsiveFontSize(context, fontSize: 18),
-      fontFamily: 'Montserrat',
-      fontWeight: FontWeight.w600,
-      height: 0,
-    );
-  }
-
-  static TextStyle styleBold16(BuildContext context) {
-    return TextStyle(
-      color: const Color(0xff4EB7F2),
-      fontSize: getResponsiveFontSize(context, fontSize: 16),
-      fontFamily: 'Montserrat',
+  static const TextStyle styleDMSansBold16 = TextStyle(
+      color: Color(0xFF7F7F7F),
+      fontSize: 16,
+      fontFamily: 'DM Sans',
       fontWeight: FontWeight.w700,
-      height: 0,
     );
-  }
+  static const TextStyle styleDMSansBold18 =TextStyle(
+      color: Color(0xFF7F7F7F),
+      fontSize: 18,
+      fontFamily: 'DM Sans',
+      fontWeight: FontWeight.w700,
 
-  static TextStyle styleMedium20(BuildContext context) {
-    return TextStyle(
-      color: Colors.white,
-      fontSize: getResponsiveFontSize(context, fontSize: 20),
-      fontFamily: 'Montserrat',
-      fontWeight: FontWeight.w500,
-      height: 0,
     );
-  }
+  static const TextStyle styleDMSansBold19 = TextStyle(
+      color: Color(0xFF7F7F7F),
+      fontSize: 19,
+      fontFamily: 'DM Sans',
+      fontWeight: FontWeight.w700,
+    );
+  static const TextStyle styleDMSansBold24 = TextStyle(
+      color: Color(0xFF7F7F7F),
+      fontSize: 24,
+      fontFamily: 'DM Sans',
+      fontWeight: FontWeight.w700,
+
+    );
+
+
 }
 
 double getResponsiveFontSize(BuildContext context, {required double fontSize}) {

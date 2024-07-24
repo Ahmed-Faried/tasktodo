@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_to_do_app/shared/bloc_observer.dart';
@@ -7,8 +8,10 @@ import 'package:task_to_do_app/shared/resources/app_localizations.dart';
 import 'package:task_to_do_app/shared/resources/color_manager.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'generated/assets.dart';
 import 'layout/Home View/HomeView.dart';
 import 'layout/Home View/cubit/homeview_cubit.dart';
+import 'layout/onBoarding/onBoarding.dart';
 
 Future<void> main() async{
   runApp(const MyApp());
@@ -73,8 +76,16 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: ColorManager.primary),
             useMaterial3: true,
           ),
-          title: 'Flutter Demo',
-          home:   HomeView(),
+          title: 'ToDoApp',
+          home:   OnBoarding(),
+          // home:   AnimatedSplashScreen(
+          //   splash: Image.asset(Assets.imagesLogo),
+          //   nextScreen:  OnBoarding(),
+          //   splashTransition: SplashTransition.fadeTransition,
+          //   backgroundColor:  const Color(0xff5F33E1),
+          //   splashIconSize: 45,
+          //   duration: 5000,
+          // ),
         ),
         listener: (BuildContext context, HomeViewState state) {  },
       ),);

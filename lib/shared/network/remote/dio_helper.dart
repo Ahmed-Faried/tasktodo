@@ -1,6 +1,5 @@
 import 'package:dio/browser.dart';
 import 'package:dio/dio.dart';
-
 import '../../resources/string_manager.dart';
 import '../local/cache_helper.dart';
 
@@ -20,11 +19,6 @@ class DioHelper {
       ),
     );
 
-    dioVehicles = Dio(
-        BaseOptions(
-          baseUrl: 'https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/all-vehicles-model/records'
-        )
-    );
   }
 
   static Future<Response> getDateVehicles({

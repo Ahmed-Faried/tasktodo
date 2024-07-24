@@ -8,6 +8,7 @@ class Assets {
   static const String imagesLogo = 'assets/images/Logo.png';
   static const String imagesMarket = 'assets/images/Market.png';
   static const String imagesOnBoarding = 'assets/images/onBoarding.png';
+  static const String imagesQr = 'assets/images/Qr.png';
   static const String langAr = 'assets/lang/ar.json';
   static const String langEn = 'assets/lang/en.json';
 

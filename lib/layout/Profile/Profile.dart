@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_to_do_app/shared/resources/app_styles.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -55,15 +56,7 @@ class CustomProfileContainer extends StatelessWidget {
               width: double.infinity,
               child: Text(
                 title,
-                style: const TextStyle(
-                  color: Color(0x662F2F2F),
-                  fontSize: 12,
-                  fontFamily: 'DM Sans',
-                  fontWeight: FontWeight.w500,
-                  height: 0.11,
-
-                  letterSpacing: 0.20,
-                ),
+                style: AppStyles.styleDMSansMedium12,
               ),
             ),
             const SizedBox(height: 4),
@@ -71,14 +64,7 @@ class CustomProfileContainer extends StatelessWidget {
               width: double.infinity,
               child: Text(
                 data,
-                style: const TextStyle(
-                  color: Color(0x992F2F2F),
-                  fontSize: 18,
-                  fontFamily: 'DM Sans',
-                  fontWeight: FontWeight.w700,
-
-                  letterSpacing: 0.20,
-                ),
+                style: AppStyles.styleDMSansBold18,
               ),
             ),
           ],

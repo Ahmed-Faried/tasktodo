@@ -60,8 +60,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         const SizedBox(height: 15),
                         IntlPhoneField(
+
                           focusNode: focusNode,
                           decoration: InputDecoration(
+                            focusColor: Colors.white,
                             labelText: 'Phone Number',
                             hintStyle: AppStyles.styleDMSansRegular14,
                             border: OutlineInputBorder(

@@ -10,6 +10,8 @@ import 'package:window_manager/window_manager.dart';
 import 'layout/Auth/SignIn/LoginScreen.dart';
 import 'layout/Auth/SignUp/SignUpScreen.dart';
 import 'layout/Home View/cubit/homeview_cubit.dart';
+import 'layout/HomePage/HomePage.dart';
+import 'layout/Profile/Profile.dart';
 
 Future<void> main() async{
   runApp(const MyApp());
@@ -75,7 +77,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           title: 'ToDoApp',
-          home:   SignUpScreen(),
+          home:   HomePage(),
           // home:   AnimatedSplashScreen(
           //   splash: Image.asset(Assets.imagesLogo),
           //   nextScreen:  OnBoarding(),

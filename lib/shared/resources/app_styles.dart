@@ -47,13 +47,13 @@ abstract class AppStyles {
 
     );
   static const TextStyle styleDMSansBold19 = TextStyle(
-      color: Color(0xFF7F7F7F),
+      color: Color(0xffFFFFFF),
       fontSize: 19,
       fontFamily: 'DM Sans',
       fontWeight: FontWeight.w700,
     );
   static const TextStyle styleDMSansBold24 = TextStyle(
-      color: Color(0xFF7F7F7F),
+      color: Color(0xff24252C),
       fontSize: 24,
       fontFamily: 'DM Sans',
       fontWeight: FontWeight.w700,

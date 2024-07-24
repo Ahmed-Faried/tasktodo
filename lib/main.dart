@@ -7,11 +7,9 @@ import 'package:task_to_do_app/shared/network/remote/dio_helper.dart';
 import 'package:task_to_do_app/shared/resources/app_localizations.dart';
 import 'package:task_to_do_app/shared/resources/color_manager.dart';
 import 'package:window_manager/window_manager.dart';
-
-import 'generated/assets.dart';
-import 'layout/Home View/HomeView.dart';
+import 'layout/Auth/SignIn/LoginScreen.dart';
+import 'layout/Auth/SignUp/SignUpScreen.dart';
 import 'layout/Home View/cubit/homeview_cubit.dart';
-import 'layout/onBoarding/onBoarding.dart';
 
 Future<void> main() async{
   runApp(const MyApp());
@@ -77,7 +75,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           title: 'ToDoApp',
-          home:   OnBoarding(),
+          home:   SignUpScreen(),
           // home:   AnimatedSplashScreen(
           //   splash: Image.asset(Assets.imagesLogo),
           //   nextScreen:  OnBoarding(),

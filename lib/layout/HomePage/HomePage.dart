@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:task_to_do_app/generated/assets.dart';
 import 'package:task_to_do_app/layout/HomePage/Cubit/HomePageCubit.dart';
 import 'package:task_to_do_app/layout/HomePage/Cubit/HomePageState.dart';
-import 'package:task_to_do_app/layout/HomePage/Model/TaskModel.dart';
 import 'package:task_to_do_app/layout/Profile/Profile.dart';
 import 'package:task_to_do_app/shared/resources/app_styles.dart';
 import 'package:task_to_do_app/shared/resources/color_manager.dart';
-
-import '../Auth/SignUp/Cubit/SignUpCubit.dart';
+import '../AddTask/AddTask.dart';
+import '../Task Details/TaskDetails.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       child: BlocConsumer<HomePageCubit ,HomePageState>(
         builder: (BuildContext context, HomePageState state) => Scaffold(
           appBar: AppBar(
-            leading: Text(" Logo", style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),),
+            leading: Text(" Logo", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),),
 
             actions:
             [
@@ -67,6 +67,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           body: SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
             child: SizedBox(
               height: MediaQuery.sizeOf(context).height,
               child: Padding(
@@ -153,7 +154,6 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     const SizedBox(height: 12,),
-
                      Expanded(
                        child: Container(
 
@@ -164,17 +164,16 @@ class _HomePageState extends State<HomePage> {
 
                               return    InkWell(
                                 onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (Context) =>  TaskDetails(taskModel:cubit.taskModel[index])));
                                   cubit.taskModel[index].id;
                                 },
                                 child: CustomCardHomePage(
                                   title: cubit.taskModel[index].title??"",
-                                  date: cubit.taskModel[index].createdAt??"",
+                                  date: DateFormat('MM/dd/yyyy').format(cubit.taskModel[index].createdAt)??"",
                                   description: cubit.taskModel[index].desc??"",
                                   importance: cubit.taskModel[index].priority??"",
                                   processTitle: cubit.taskModel[index].status??"",
-                                  colorFlag: Colors.blue ,
-                                  colorProcessTitle: Colors.redAccent,
-                                  colorTextProcessTitle: Colors.black,),
+                                  ),
                               );
                             },
                           ),
@@ -194,6 +193,7 @@ class _HomePageState extends State<HomePage> {
                 shape: const CircleBorder(),
                 backgroundColor: const Color(0xffEBE5FF),
                 onPressed: () {
+
                 },
                 child: Image.asset(Assets.imagesQr),
               ),
@@ -202,6 +202,7 @@ class _HomePageState extends State<HomePage> {
                 shape: const CircleBorder(),
                 backgroundColor: ColorManager.primary,
                 onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (Context) => const AddTask()));
                 },
                 child: const Icon(Icons.add , color: Colors.white,),
               ),
@@ -224,19 +225,15 @@ class CustomCardHomePage extends StatelessWidget {
      required this.description,
      required this.importance,
      required this.processTitle,
-     required this.colorFlag,
-     required this.colorProcessTitle,
-     required this.colorTextProcessTitle,
+
   });
 
   String title;
   String description;
   String processTitle;
-   Color colorProcessTitle;
-   Color colorTextProcessTitle;
   String importance;
   var date;
-  Color colorFlag ;
+
 
 
   @override
@@ -273,12 +270,21 @@ class CustomCardHomePage extends StatelessWidget {
                         SizedBox(width: 5,),
                         Container(
                            decoration: BoxDecoration(
-                             color: colorProcessTitle,
+                             color: processTitle == 'waiting'
+                                ? const Color(0xFFFFE4F2)
+                                : processTitle == 'inprogress'
+                                ? const Color(0xFFF0ECFF)
+                                : const Color(0xFFE3F2FF),
                              borderRadius: BorderRadius.circular(5)
                            )
                            ,child:  Padding(
                              padding: const EdgeInsets.symmetric(horizontal: 8 , vertical: 5),
-                             child: Center(child: Text(processTitle ,style: AppStyles.styleDMSansMedium12.copyWith(color:colorTextProcessTitle ),)),
+                             child: Center(child: Text(processTitle ,style: AppStyles.styleDMSansMedium12.copyWith(color:importance == 'low' ||
+                                 importance == 'Low'
+                                 ? const Color(0xFF0087FF)
+                                 : importance == 'medium'
+                                 ? const Color(0xFF5F33E1)
+                                 : const Color(0xFFFF7D53), ),)),
                            )),
                      ],
                                          ),
@@ -289,8 +295,18 @@ class CustomCardHomePage extends StatelessWidget {
                      [
                        Row(
                          children: [
-                           Icon(Icons.flag , color: colorFlag,),
-                           Text(importance , style: AppStyles.styleDMSansMedium12.copyWith(color: colorFlag)),
+                           Icon(Icons.flag , color:importance == 'low' ||
+                               importance == 'Low'
+                               ? const Color(0xFF0087FF)
+                               : importance == 'medium'
+                               ? const Color(0xFF5F33E1)
+                               : const Color(0xFFFF7D53),),
+                           Text(importance , style: AppStyles.styleDMSansMedium12.copyWith(color: importance == 'low' ||
+                               importance == 'Low'
+                               ? const Color(0xFF0087FF)
+                               : importance == 'medium'
+                               ? const Color(0xFF5F33E1)
+                               : const Color(0xFFFF7D53),)),
                          ],
                        ),
                        Text(date.toString() , style: AppStyles.styleDMSansRegular12,),
@@ -302,9 +318,59 @@ class CustomCardHomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12,),
-            const Column(
+             Column(
               children: [
-                Icon(Icons.list_rounded ,)
+                PopupMenuButton<String>(
+                  onSelected: (value) {
+                    if (value == 'edit') {
+
+                    }
+                    else if (value == 'delete') {
+
+                    }
+                  },
+                  icon: const Icon(Icons.more_vert),
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  itemBuilder: (BuildContext context) {
+                    return [
+                      const PopupMenuItem<String>(
+                          value: 'edit',
+                          child: Opacity(
+                            opacity: 0.87,
+                            child: Text(
+                              'Edit',
+                              style: TextStyle(
+                                color: Color(0xFF00060D),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          )
+                      ),
+                      PopupMenuItem<String>(
+                        value: 'delete',
+                        child: const Opacity(
+                          opacity: 0.87,
+                          child: Text(
+                            'Delete',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Color(0xFFFF7D53),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          // cubit.deleteTask(taskId: widget.taskModel.id ?? '');
+                        },
+                      ),
+                    ];
+                  },
+                ),
               ],
             )
           ],

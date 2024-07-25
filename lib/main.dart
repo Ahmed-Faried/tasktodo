@@ -10,11 +10,13 @@ import 'package:task_to_do_app/shared/resources/app_localizations.dart';
 import 'package:task_to_do_app/shared/resources/color_manager.dart';
 import 'package:window_manager/window_manager.dart';
 import 'layout/AddTask/AddTask.dart';
+import 'layout/AddTask/Cubit/AddTaskCubit.dart';
 import 'layout/Auth/SignIn/Cubit/SignInCubit.dart';
 import 'layout/Auth/SignUp/Cubit/SignUpCubit.dart';
 import 'layout/Home View/cubit/homeview_cubit.dart';
 import 'layout/HomePage/Cubit/HomePageCubit.dart';
 import 'layout/Profile/Cubit/ProfileCubit.dart';
+import 'layout/Task Details/Cubit/TaskDetailsCubit.dart';
 import 'layout/Task Details/TaskDetails.dart';
 import 'layout/onBoarding/onBoarding.dart';
 
@@ -54,6 +56,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (BuildContext context) => LoginCubit()),
         BlocProvider(create: (BuildContext context) => ProfileCubit()..getProfileData()),
         BlocProvider(create: (BuildContext context) => SignUpCubit()),
+        BlocProvider(create: (BuildContext context) => TaskDetailsCubit()),
+        BlocProvider(create: (BuildContext context) => AddTaskCubit()),
         BlocProvider(create: (BuildContext context) => HomePageCubit()..getList(status: "/todos" ),),
 
 

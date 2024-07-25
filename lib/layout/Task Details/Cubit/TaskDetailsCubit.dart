@@ -18,12 +18,12 @@ class TaskDetailsCubit extends Cubit<TaskDetailsState> {
 
   TaskDetailsModel? taskDetailsModel ;
 
-  getTaskID({
+  Future<void> getTaskID({
     required String id,
 
-  }) {
+  }) async {
     emit(CreateTaskLoadingScreen());
-    DioHelper.getDate(
+   await DioHelper.getDate(
 
         url: "/todos/$id"
     ).then((value) async {

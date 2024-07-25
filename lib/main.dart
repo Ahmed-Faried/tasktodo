@@ -1,17 +1,22 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_to_do_app/layout/Auth/SignIn/LoginScreen.dart';
+import 'package:task_to_do_app/layout/HomePage/HomePage.dart';
 import 'package:task_to_do_app/shared/bloc_observer.dart';
+import 'package:task_to_do_app/shared/components/constants.dart';
 import 'package:task_to_do_app/shared/network/local/cache_helper.dart';
 import 'package:task_to_do_app/shared/network/remote/dio_helper.dart';
 import 'package:task_to_do_app/shared/resources/app_localizations.dart';
 import 'package:task_to_do_app/shared/resources/color_manager.dart';
 import 'package:window_manager/window_manager.dart';
-import 'layout/Auth/SignIn/LoginScreen.dart';
-import 'layout/Auth/SignUp/SignUpScreen.dart';
+import 'layout/AddTask/AddTask.dart';
+import 'layout/Auth/SignIn/Cubit/SignInCubit.dart';
+import 'layout/Auth/SignUp/Cubit/SignUpCubit.dart';
 import 'layout/Home View/cubit/homeview_cubit.dart';
-import 'layout/HomePage/HomePage.dart';
-import 'layout/Profile/Profile.dart';
+import 'layout/HomePage/Cubit/HomePageCubit.dart';
+import 'layout/Profile/Cubit/ProfileCubit.dart';
+import 'layout/Task Details/TaskDetails.dart';
+import 'layout/onBoarding/onBoarding.dart';
 
 Future<void> main() async{
   runApp(const MyApp());
@@ -20,6 +25,7 @@ Future<void> main() async{
   await DioHelper.inti();
   await CacheHelper.init();
   runApp(const MyApp());
+  token = CacheHelper.getData(key: 'Token');
 
   await Future.delayed(Duration.zero);
   await windowManager.ensureInitialized();
@@ -44,10 +50,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-      BlocProvider<HomeViewCubit>(
-        create: (context) => HomeViewCubit()
-          ..getSavedLanguage()
-      ),
+        BlocProvider<HomeViewCubit>(create: (context) => HomeViewCubit()..getSavedLanguage()),
+        BlocProvider(create: (BuildContext context) => LoginCubit()),
+        BlocProvider(create: (BuildContext context) => ProfileCubit()..getProfileData()),
+        BlocProvider(create: (BuildContext context) => SignUpCubit()),
+        BlocProvider(create: (BuildContext context) => HomePageCubit()..getList(status: "/todos" ),),
+
 
 
     ],
@@ -77,10 +85,10 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           title: 'ToDoApp',
-          home:   HomePage(),
+          home:SignInScreen(),
           // home:   AnimatedSplashScreen(
           //   splash: Image.asset(Assets.imagesLogo),
-          //   nextScreen:  OnBoarding(),
+          //   nextScreen:   Profile(),
           //   splashTransition: SplashTransition.fadeTransition,
           //   backgroundColor:  const Color(0xff5F33E1),
           //   splashIconSize: 45,
@@ -92,42 +100,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// getNotificationStream({required BuildContext context}) {
-//   return Stream.periodic(const Duration(minutes: 30), (i) {
-//     HomeViewCubit.get(context).getNotification();
-//   });
-// }
-//
-// Future<Position> determinePosition() async {
-//   bool serviceEnabled;
-//   LocationPermission permission;
-//
-//   // Test if location services are enabled.
-//   serviceEnabled = await Geolocator.isLocationServiceEnabled();
-//   if (!serviceEnabled) {
-//     // Location services are not enabled don't continue
-//     // accessing the position and request users of the
-//     // App to enable the location services.
-//
-//     return Future.error('Location services are disabled.');
-//   }
-//
-//   permission = await Geolocator.checkPermission();
-//   await Geolocator.requestPermission();
-//   if (permission == LocationPermission.denied) {
-//     permission = await Geolocator.requestPermission();
-//     if (permission == LocationPermission.denied) {
-//       Geolocator.openLocationSettings();
-//
-//       Geolocator.requestPermission();
-//       return Future.error('Location permissions are denied');
-//     }
-//   }
-//
-//   if (permission == LocationPermission.deniedForever) {
-//     return Future.error(
-//         'Location permissions are permanently denied, we cannot request permissions.');
-//   }
-//
-//   return await Geolocator.getCurrentPosition();
-// }

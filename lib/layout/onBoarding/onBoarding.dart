@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../generated/assets.dart';
 import '../../shared/resources/app_styles.dart';
 import '../../shared/resources/color_manager.dart';
+import '../Auth/SignIn/LoginScreen.dart';
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});
@@ -33,22 +34,27 @@ class OnBoarding extends StatelessWidget {
                     style: AppStyles.styleDMSansRegular14,
                 ),
                 const SizedBox(height: 32),
-                Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: ColorManager.primary,
-                    borderRadius: BorderRadius.circular(12)
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>  SignInScreen()));
+                  },
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: ColorManager.primary,
+                      borderRadius: BorderRadius.circular(12)
 
-                  ),
-                  child:  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Let’s Start", textAlign: TextAlign.center,
-                          style: AppStyles.styleDMSansBold19,
-                          ),
-                      const SizedBox(width: 8,),
-                      Image.asset(Assets.imagesArrowLeft ,),
-                    ],
+                    ),
+                    child:  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Let’s Start", textAlign: TextAlign.center,
+                            style: AppStyles.styleDMSansBold19,
+                            ),
+                        const SizedBox(width: 8,),
+                        Image.asset(Assets.imagesArrowLeft ,),
+                      ],
+                    ),
                   ),
                 ),
               ],

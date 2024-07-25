@@ -2,89 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:toastification/toastification.dart';
 
+import '../../generated/assets.dart';
 import '../resources/app_styles.dart';
 
-class CustomTextInput extends StatelessWidget {
-  CustomTextInput({
-    super.key,
-    required this.hint,
-    required this.controller,
-    this.keyboardType = TextInputType.text,
-    this.suffixIcon,
-    this.prefixIcon,
-    this.enabled,
-    this.readOnly = false,
-    this.obscureText = false,
-    required this.validator,
-    this.prefix,
-    this.inputFormatters,
-  });
-
-
-  final String hint;
-
-  final bool? enabled;
-
-  final bool? readOnly;
-  final TextEditingController? controller;
-
-  final TextInputType keyboardType;
-
-  final Widget? suffixIcon;
-
-  final Widget? prefixIcon;
-
-  final Widget? prefix;
-  final bool obscureText;
-
-  final inputFormatters ;
-
-  final String? Function(String?)? validator;
-
-  @override
-  Widget build(BuildContext context) {
-    return PhysicalModel(
-      borderRadius: BorderRadius.circular(20),
-      color: const Color(0xFFD9D9D9),
-      child: Center(
-        child: TextFormField(
-          enabled: enabled,
-          readOnly: readOnly!,
-          inputFormatters: inputFormatters,
-          controller: controller,
-          keyboardType: keyboardType,
-          obscureText: obscureText,
-          validator: validator,
-          style: TextStyle(color: Colors.black,fontSize: getResponsiveFontSize(context, fontSize: 24)),
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 27 , vertical: 19),
-            suffixIcon: suffixIcon,
-            prefixIcon: prefixIcon,
-            prefix: prefix,
-            hintText: hint,
-            hintStyle: TextStyle(
-                fontSize: getResponsiveFontSize(context, fontSize: 24),
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF919191)),
-            border: InputBorder.none,
-            enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
-            errorBorder: const UnderlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
-            focusedErrorBorder: const UnderlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 void toast({required BuildContext context,
   required ToastificationType type,
@@ -132,6 +52,34 @@ void toast({required BuildContext context,
   );
 }
 
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  CustomAppBar({
+    super.key,
+    required this.title
+  });
+  String title ;
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 5.0),
+        child: InkWell(child: Image.asset(Assets.imagesArrowAppBar),
+          onTap: (){
+            Navigator.pop(context);
+          },),
+      ),
+      title: Text(title,style:  AppStyles.styleDMSansBold16.copyWith(color: Colors.black) ,textAlign: TextAlign.start,),
+    );
+  }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+
+
+}
 
 
 class MyResponsiveGrid extends StatelessWidget {
@@ -284,3 +232,7 @@ class CustomTextInputPopUp extends StatelessWidget {
     );
   }
 }
+
+
+
+

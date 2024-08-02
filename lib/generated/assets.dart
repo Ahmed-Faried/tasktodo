@@ -2,16 +2,12 @@
 class Assets {
   Assets._();
 
-  static const String assetsLangAr = 'assets/lang/ar.json';
-  static const String assetsLangEn = 'assets/lang/en.json';
-  static const String imagesArrowAppBar = 'assets/images/Arrow_AppBar.png';
-  static const String imagesArrowLeft = 'assets/images/Arrow_Left.png';
-  static const String imagesLogo = 'assets/images/Logo.png';
-  static const String imagesMarket = 'assets/images/Market.png';
-  static const String imagesOnBoarding = 'assets/images/onBoarding.png';
-  static const String imagesQr = 'assets/images/Qr.png';
-  static const String imagesTaskImage = 'assets/images/TaskImage.png';
-  static const String langAr = 'assets/lang/ar.json';
-  static const String langEn = 'assets/lang/en.json';
+  static const String iconsArrowLeft = 'assets/icons/Arrow - Left.png';
+  static const String iconsBack = 'assets/icons/back.png';
+  static const String iconsQr = 'assets/icons/qr.png';
+  static const String imagesART = 'assets/images/ART.png';
+  static const String imagesImageDetails = 'assets/images/imageDetails.png';
+  static const String imagesImageItem = 'assets/images/image_item.png';
+  static const String imagesTaskSplash = 'assets/images/task_splash.png';
 
 }

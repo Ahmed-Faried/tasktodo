@@ -1,46 +1,36 @@
-import 'package:dio/browser.dart';
 import 'package:dio/dio.dart';
+
 import '../../components/constants.dart';
 import '../../resources/string_manager.dart';
 import '../local/cache_helper.dart';
 
 
-class DioHelper {
+class DioHelper
+{
   static late Dio dio ;
-  static late Dio dioVehicles ;
+
   static inti()
   {
     dio = Dio(
       BaseOptions(
         baseUrl: AppStrings.baseUrl,
-        connectTimeout: const Duration(seconds: 30),
-        receiveTimeout: const Duration(seconds: 30),
         receiveDataWhenStatusError: true,
-
       ),
     );
 
-  }
 
-  static Future<Response> getDateVehicles({
-    required String url,
-  }) async
-  {
-    return await dioVehicles.get(
-      url,
-    );
   }
 
 
 
   static Future<Response> getDate({
-    required String url,
-    Map<String,dynamic>? query ,
+  required String url,
+   Map<String,dynamic>? query ,
     dynamic data,
     String tokenVerify = ''
   }) async
   {
-    token = CacheHelper.getData(key: 'Token');
+    token = CacheHelper.getData(key: 'TokenId');
     dio.options.headers = {
       'Authorization':'Bearer ${tokenVerify.isEmpty ? token : tokenVerify}',
     };
@@ -51,10 +41,6 @@ class DioHelper {
     );
   }
 
-
-
-
-
   static Future<Response> postData({
     required String url,
     Map<String,dynamic>? query ,
@@ -62,28 +48,26 @@ class DioHelper {
     String tokenVerify = ''
   }) async
   {
-    token = CacheHelper.getData(key: 'Token');
-    dio.httpClientAdapter = BrowserHttpClientAdapter();
+    token = CacheHelper.getData(key: 'TokenId');
     dio.options.headers = {
       'Authorization':'Bearer ${tokenVerify.isEmpty ? token : tokenVerify}',
     };
-    return dio.post(
-      url ,
-      queryParameters: query,
-      data: data,
-    );
+     return dio.post(
+       url ,
+       queryParameters: query,
+       data: data,
+     );
   }
 
   static Future<Response> putData({
     required String url,
     Map<String,dynamic>? query ,
     required dynamic data ,
-    String tokenVerify = ''
   }) async
   {
-    token = CacheHelper.getData(key: 'Token');
+    token = CacheHelper.getData(key: 'TokenId');
     dio.options.headers = {
-      'Authorization':'Bearer ${tokenVerify.isEmpty ? token : tokenVerify}',
+      'Authorization':'Bearer $token',
     };
     return dio.put(
       url ,
@@ -97,7 +81,7 @@ class DioHelper {
     dynamic data,
   }) async
   {
-    token = CacheHelper.getData(key: 'Token');
+    token = CacheHelper.getData(key: 'TokenId');
     dio.options.headers = {
       'Authorization':'Bearer $token',
     };
@@ -106,24 +90,4 @@ class DioHelper {
       data: data,
     );
   }
-
-
-  static Future<Response> patchData({
-    required String url,
-    Map<String,dynamic>? query ,
-    required dynamic data ,
-    String tokenVerify = ''
-  }) async
-  {
-    token = CacheHelper.getData(key: 'Token');
-    dio.options.headers = {
-      'Authorization':'Bearer ${tokenVerify.isEmpty ? token : tokenVerify}',
-    };
-    return dio.patch(
-      url ,
-      queryParameters: query,
-      data: data,
-    );
-  }
-
 }
